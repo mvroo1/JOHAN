@@ -29,8 +29,9 @@ m.react('🤖')
 
 handler.help = ['gemini2'];
 handler.tags = ['ai'];
+handler.limit = 2;
 
-handler.command = /^بوت|chatgpt|ميجو|ai$/i;
+handler.command = /^(بوت|chatgpt|ai)$/i;
 
 export default handler;
 
