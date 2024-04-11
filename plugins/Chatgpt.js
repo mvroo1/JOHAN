@@ -7,7 +7,6 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
       return conn.reply(m.chat, `ادخل نصا للرد عليه.\n*مثال: ${usedPrefix + command} أعطني ترميز بايثون للآلة الحاسبة!*`, m);
     }
       
-m.react('🤖')
     const response = await fetch(`https://aemt.me/gemini?text=${encodeURIComponent(text)}`);
     if (!response.ok) {
       return conn.reply(m.chat, 'غير قادر على معالجة طلبك في هذا الوقت.', m);
@@ -27,9 +26,8 @@ m.react('🤖')
   }
 };
 
-handler.help = ['gemini2'];
+handler.help = ['chatgpt'];
 handler.tags = ['ai'];
-handler.limit = 2;
 
 handler.command = /^(بوت|chatgpt|ai)$/i;
 
