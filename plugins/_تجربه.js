@@ -1,8 +1,9 @@
-import fetch from 'node-fetch';
+import fetch from 'node-fetch'
 
-const handler = async (m, { conn, text, usedPrefix, command }) => {
-  try {
-    
+let handler = async (m, { conn, command, text, usedPrefix }) => {
+
+  async(Void, citel, text) => {
+
 if (!citel.quoted) return citel.reply (`*֎╎رد عـلـي رسـالـه شـخـص واكـتـب اسـم*`);
 if ( !text ) return citel.reply( `*֎╎رد عـلـي رسـالـه شـخـص واكـتـب اسـم مـثـال┇.كونكت ELSA*`)
 var words = text.split(" ");
@@ -22,13 +23,8 @@ const vcard = 'BEGIN:VCARD\n' +
         return await Void.sendMessage(citel.chat, buttonMessaged, { quoted: citel });
  
 })
-
-handler.help = ['konakt'];
-handler.tags = ['ai'];
-handler.limit = 2;
-
-handler.command = /^(كونكت)$/i;
-
-export default handler;
-
-// Ni plugens
+  
+handler.help = ['hunter']
+handler.tags = ['anime']
+handler.command = /^كونكت$/i
+export default handler
