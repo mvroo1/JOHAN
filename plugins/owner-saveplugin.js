@@ -1,19 +1,14 @@
-import fs from 'fs'
+import fs from 'fs';
+const handler = async (m, {text, usedPrefix, command}) => {
+  if (!text) throw `uhm.. che nome do al plugin?`;
+  if (!m.quoted.text) throw `Rispondi al msg!`;
+  const path = `plugins/${text}.js`;
+  await fs.writeFileSync(path, m.quoted.text);
+  m.reply(`Salvato come ${path}`);
+};
+handler.help = ['saveplugin'].map((v) => v + ' <nombre>');
+handler.tags = ['owner'];
+handler.command = ['save', 'saveplugin'];
 
-var handler = async (m, { text, usedPrefix, command }) => {
-
-if (!text) return conn.reply(m.chat, `🎌 *ادخل اسم الملف اللي عاوز تسمي بيه الامر*`, m, fake, )
-if (!m.quoted.text) return conn.reply(m.chat, `🚩 *أدخل محتوى البرنامج المساعد*`, m, fake, )
-let path = `plugins/${text}.js`
-await fs.writeFileSync(path, m.quoted.text)
-conn.reply(m.chat, `📂 *تم الحفظ في* ${path}`, m, fake, )
-
-}
-handler.help = ['saveplugin']
-handler.tags = ['own']
-handler.command = ['save', 'انشاملف']
-
-handler.rowner = true
-
-export default handler
-  
+handler.rowner = true;
+export default handler;
