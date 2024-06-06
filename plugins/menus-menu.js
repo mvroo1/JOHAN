@@ -34,7 +34,7 @@ let rtotalreg = Object.values(global.db.data.users).filter(user => user.register
 let more = String.fromCharCode(8206)
 let readMore = more.repeat(900) 
   const taguser = '@' +  m.sender.split('@s.whatsapp.net')[0];
-let str = `Nezuko-BOT 
+let str = `𝐉𝐀𝐂𝐊-𝐁𝐎𝐓
 
  *مرحبا,* ${taguser}
 
@@ -97,7 +97,7 @@ _🕌 ━━│الدين│━━🕌_
 * ಠ_ಠ 💠│اطفاء*
 * ಠ_ಠ 💠│تفعيل*
 * ಠ_ಠ 💠│المبندين*
-*ಠ_ಠ 💠│إعادة*
+* ಠ_ಠ 💠│إعادة*
 * ಠ_ಠ 💠│اعادةتشغيل*
 * ಠ_ಠ 💠│أدخل*
 * ಠ_ಠ 💠│ضيف_اكس_بي*
