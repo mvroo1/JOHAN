@@ -13,8 +13,8 @@ const handler = async (m, { conn, text, usedPrefix: prefijo }) => {
             body: { text: `test`.trim() },
             footer: { text: `𝙏𝙝𝙚𝙈𝙫𝙧𝙤-𝘽𝙤𝙩`.trim() },  
             header: {
-                title: `*⁩ تفضل القائمة يا  : @${mentionId.split('@')[0]}*`,
-                subtitle: `test`,
+                title: `*┃━━━━━⬣𝙼𝚅𝚁𝙾-𝙱𝙾𝚃⬣━━━━━┃*\n\n*◞❐اهـلا بـيـك فـي بـوت مـارو🧛🏻‍♂️*\n\n*◞❐ تفضل القائمة يا  :* @${mentionId.split('@')[0]}`,
+                subtitle: ``,
                 hasMediaAttachment: true,
                 imageMessage: joanimiimg.imageMessage,
             },
