@@ -1,5 +1,5 @@
 let handler = async (m, { conn, args, usedPrefix, command }) => {   
-    let videoUrl = 'https://telegra.ph/file/6f5728ffb36e986b957f6.mp4';
+let videoUrl = 'https://telegra.ph/file/6f5728ffb36e986b957f6.mp4';
     conn.relayMessage(m.chat, {
       viewOnceMessage: {
         message: {
