@@ -7,7 +7,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
               title: '*┃━━━━━⬣𝙼𝚅𝚁𝙾-𝙱𝙾𝚃⬣━━━━━┃*'
             },
             body: {
-              text: '*▢اسم البوت : بوت مارو*', '*▢وقت التشغيل : ${uptime}*'
+              text: '*▢اسم البوت : بوت مارو*'
             },
             nativeFlowMessage: {
               buttons: [
