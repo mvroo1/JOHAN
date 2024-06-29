@@ -1,77 +1,81 @@
-//Copyright ©JOANIMI/KILLUA
+// حقوق الطبع والنشر ©JOANIMI/KILLUA
 //https://whatsapp.com/channel/0029Vab5oDNElagpHtJjmT0B
 
-import { prepareWAMessageMedia, generateWAMessageFromContent, getDevice } from '@whiskeysockets/baileys'
+استيراد {prepareWAMessageMedia، generateWAMessageFromContent، getDevice} من '@whiskeysockets/baileys'
 
-const handler = async (m, { conn, text, usedPrefix: prefijo }) => {
-    const device = await getDevice(m.key.id);
+معالج ثابت = async (m، {اتصال، نص، بادئة مستخدمة: prefijo }) => {
+    جهاز ثابت = انتظار getDevice(m.key.id)؛
+    معرف الذكر الثابت = m.key.participant || m.key.remoteJid؛
 
-    if (device !== 'desktop' || device !== 'web') {      
-        const interactiveMessage = {
-            body: { text: `test`.trim() },
-            footer: { text: `©JoAnimi for test`.trim() },  
-            header: {
-                title: `test`,
-                subtitle: `test`,
-                hasMediaAttachment: false,
+    إذا (الجهاز !== 'سطح المكتب' || الجهاز !== 'الويب') {      
+        var joanimiimg = await prepareWAMessageMedia({ image: {url: 'https://telegra.ph/file/2784677013ba9efe6cc03.jpg'}}, { upload: conn.waUploadToServer })
+        رسالة تفاعلية ثابتة = {
+            الجسم: { النص: `اختبار مرحبًا @${mentionId.split('@')[0]}`.trim() },
+            التذييل: { النص: `©JoAnimi للاختبار`.trim() }،  
+            رأس: {
+                العنوان: `اختبار`،
+                العنوان الفرعي: `اختبار`،
+                hasMediaAttachment: صحيح،
+                رسالة الصورة: joanimiimg.imageMessage،
             },
-            nativeFlowMessage: {
-  						buttons: [
+            رسالة التدفق الأصلية: {
+  						أزرار: [
                        {
-                "name": "single_select",
+                "الاسم": "اختيار واحد"،
                 "buttonParamsJson": "{\"title\":\"title\",\"sections\":[{\"title\":\"title\",\"highlight_label\":\"label\",\"rows\":[{\"header\":\"header\",\"title\":\"title\",\"description\":\"description\",\"id\":\"id\"},{\"header\":\"header\",\"title\":\"title\",\"description\":\"description\",\"id\":\"id\"}]}]}"
                        },
                        {
-                "name": "quick_reply",
+                "الاسم": "الرد السريع"،
                 "buttonParamsJson": "{\"display_text\":\"quick_reply\",\"id\":\"massage\"}"
                         },
                         {
-                 "name": "cta_url",
+                 "الاسم": "cta_url"،
                  "buttonParamsJson": "{\"display_text\":\"url\",\"url\":\"https://www.google.com\",\"merchant_url\":\"\"}"
                         },
                         {
-                 "name": "cta_call",
+                 "الاسم": "cta_call"،
                  "buttonParamsJson": "{\"display_text\":\"call\",\"id\":\"message\"}"
                         },
                         {
-                 "name": "cta_copy",
+                 "الاسم": "cta_copy"،
                  "buttonParamsJson": "{\"display_text\":\"copy\",\"id\":\"123456789\",\"copy_code\":\"message\"}"
                         },
                         {
-                 "name": "cta_reminder",
+                 "الاسم": "cta_reminder"،
                  "buttonParamsJson": "{\"display_text\":\"cta_reminder\",\"id\":\"message\"}"
                         },
                         {
-                 "name": "cta_cancel_reminder",
+                 "الاسم": "cta_cancel_reminder"،
                  "buttonParamsJson": "{\"display_text\":\"cta_cancel_reminder\",\"id\":\"message\"}"
                         },
                         {
-                 "name": "address_message",
+                 "الاسم": "address_message"،
                  "buttonParamsJson": "{\"display_text\":\"address_message\",\"id\":\"message\"}"
                         },
                         {
-                 "name": "send_location",
+                 "الاسم": "send_location"،
                  "buttonParamsJson": ""
                         }
-  			  		],
+  			  		]،
                 messageParamsJson: ''
             }
         };        
 
-        let msg = generateWAMessageFromContent(m.chat, {
-            viewOnceMessage: {
-                message: {
-                    interactiveMessage,
+        دع الرسالة = generateWAMessageFromContent(m.chat، {
+            عرض مرة واحدة: {
+                رسالة: {
+                    رسالة تفاعلية،
                 },
             },
-        }, { userJid: conn.user.jid, quoted: m })
-        conn.relayMessage(m.chat, msg.message, { messageId: msg.key.id});
+        }, { userJid: conn.user.jid، مقتبس: m })
+        msg.message.viewOnceMessage.message.interactiveMessage.contextInfo = { مذكور Jid: [معرف الذكر] };
+        conn.relayMessage(m.chat, msg.message, { messageId: msg.key.id });
 
-    } else {
-        conn.sendFile(m.chat, m);      
+    } آخر {
+        conn.sendFile(m.chat, 'JoAnimi•Error.jpg', m);      
     }    
 };
-handler.help = ['قايمه'];
-handler.tags = ['ازرار'];
-handler.command = /^(mboton)$/i;
-export default handler;
+handler.help = ['قايمهه'];
+handler.tags = ['للاختبار'];
+Handler.command = /^(imgboton)$/i;
+معالج التصدير الافتراضي؛
