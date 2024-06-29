@@ -4,10 +4,11 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
         message: {
           interactiveMessage: {
             header: {
-              title: '*♯𝙼𝚅𝚁𝙾-𝙱𝙾𝚃 🧛🏻‍♂️📌*'
+              title: '*┃━━━━━⬣𝙼𝚅𝚁𝙾-𝙱𝙾𝚃⬣━━━━━┃*'
             },
             body: {
-              text: 'نورت قسم الاوامر بلازرار🕊💜'
+              text: '*▢اسم البوت : بوت مارو*',
+                  '*▢وقت التشغيل : ${uptime}*'
             },
             nativeFlowMessage: {
               buttons: [
