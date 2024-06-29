@@ -52,9 +52,9 @@ const handler = async (m, { conn, text, usedPrefix: prefijo }) => {
   						  				highlight_label: 'ON',
   						  				rows: [
   						  					{
-  						  		    		header: 'Test',
-  										      title: 'Click Me',
-  									    	  description: 'Click Me',
+  						  		    		header: 'قسم الادمن',
+  										      title: '',
+  									    	  description: 'مارو1',
   								    		  id: 'te'
   						  		    	}
   						  				]
@@ -72,8 +72,8 @@ const handler = async (m, { conn, text, usedPrefix: prefijo }) => {
                               {
                                   name: 'cta_url',
                                   buttonParamsJson: JSON.stringify({
-                                      display_text: 'url',
-                                      url: 'https://www.google.com',
+                                      display_text: 'كـل اللي يخصني',
+                                      url: 'https://www.atom.bio/m_vro1',
                                       merchant_url: ''
                                   })
                               },
