@@ -1,4 +1,3 @@
-var joanimiimg = await prepareWAMessageMedia({ image: {url: 'https://telegra.ph/file/2784677013ba9efe6cc03.jpg'}}, { upload: conn.waUploadToServer })
 let handler = async (m, { conn, args, usedPrefix, command }) => {      
     conn.relayMessage(m.chat, {
       viewOnceMessage: {
