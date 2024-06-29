@@ -1,3 +1,6 @@
+{      
+        var joanimiimg = await prepareWAMessageMedia({ image: {url: 'https://telegra.ph/file/e7f49bd7c3aad2f429044.jpg'}}, { upload: conn.waUploadToServer })
+        رسالة تفاعلية ثابتة = {
 let handler = async (m, { conn, args, usedPrefix, command }) => {      
     conn.relayMessage(m.chat, {
       viewOnceMessage: {
