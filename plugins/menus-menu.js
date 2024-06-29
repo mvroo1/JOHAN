@@ -1,61 +1,61 @@
-//حقوق الطبع والنشر ©JOANIMI/KILLUA
+//Copyright ©JOANIMI/KILLUA
 //https://whatsapp.com/channel/0029Vab5oDNElagpHtJjmT0B
 
-استيراد {تحضيرWAMessageMedia، إنشاءWAMessageFromContent، getDevice} من '@whiskeysockets/baileys'
+import { prepareWAMessageMedia, generateWAMessageFromContent, getDevice } from '@whiskeysockets/baileys'
 
-معالج const = غير متزامن (m, { conn, text,usedPrefix: prefijo }) => {
-    جهاز ثابت = انتظار getDevice(m.key.id)؛
-    constmentmentId = m.key.participant || m.key.remoteJid;
+const handler = async (m, { conn, text, usedPrefix: prefijo }) => {
+    const device = await getDevice(m.key.id);
+    const mentionId = m.key.participant || m.key.remoteJid;
 
-    إذا (الجهاز !== 'سطح المكتب' || الجهاز !== 'الويب') {      
-        var joanimiimg = انتظار تحضيرWAMessageMedia({ image: {url: 'https://telegra.ph/file/2784677013ba9efe6cc03.jpg'}}, { upload: conn.waUploadToServer })
-        رسالة تفاعلية ثابتة = {
-            الجسم: { النص: `test`.trim() },
-            التذييل: { النص: `©JoAnimi for test`.trim() }،  
-            رأس: {
-                العنوان: `اختبار مرحبًا @${mentionId.split('@')[0]}`،
-                العنوان الفرعي: `اختبار`،
-                hasMediaAttachment: صحيح،
-                رسالة الصورة: joanimiimg.imageMessage،
+    if (device !== 'desktop' || device !== 'web') {      
+        var joanimiimg = await prepareWAMessageMedia({ image: {url: 'https://telegra.ph/file/2784677013ba9efe6cc03.jpg'}}, { upload: conn.waUploadToServer })
+        const interactiveMessage = {
+            body: { text: `test`.trim() },
+            footer: { text: `©JoAnimi for test`.trim() },  
+            header: {
+                title: `test hi @${mentionId.split('@')[0]}`,
+                subtitle: `test`,
+                hasMediaAttachment: true,
+                imageMessage: joanimiimg.imageMessage,
             },
-            رسالة التدفق الأصلية: {
-  						أزرار: [
+            nativeFlowMessage: {
+  						buttons: [
   							{
-  								الاسم: 'single_select'،
+  								name: 'single_select',
   						  	buttonParamsJson: JSON.stringify({
-  						  		العنوان: "انقر فوقي"،
-  						  		الأقسام: [
+  						  		title: 'Click Me',
+  						  		sections: [
   						  			{
-  						  				العنوان: "القائمة"،
-  							  	    Highlight_label: "تشغيل"،
-  						  		    الصفوف: [
+  						  				title: 'List',
+  							  	    highlight_label: 'ON',
+  						  		    rows: [
   						  		    	{
-  						  		    		العنوان: "اختبار"،
-  										      العنوان: 'انقر فوقي'،
-  									    	  الوصف: "انقر فوقي"،
-  								    		  المعرف: "اختبار"
+  						  		    		header: 'Test',
+  										      title: 'Click Me',
+  									    	  description: 'Click Me',
+  								    		  id: 'test'
   						  		    	}
   						  		    ]
   						  			},
   						  			{
-  						  				highlight_label: 'تشغيل',
-  						  				الصفوف: [
+  						  				highlight_label: 'ON',
+  						  				rows: [
   						  					{
-  						  		    		العنوان: "اختبار"،
-  										      العنوان: 'انقر فوقي'،
-  									    	  الوصف: "انقر فوقي"،
-  								    		  المعرف: 'تيس'
+  						  		    		header: 'Test',
+  										      title: 'Click Me',
+  									    	  description: 'Click Me',
+  								    		  id: 'tes'
   						  		    	}
   						  				]
   						  			},
   						  			{
-  						  				highlight_label: 'تشغيل',
-  						  				الصفوف: [
+  						  				highlight_label: 'ON',
+  						  				rows: [
   						  					{
-  						  		    		العنوان: "اختبار"،
-  										      العنوان: 'انقر فوقي'،
-  									    	  الوصف: "انقر فوقي"،
-  								    		  المعرف: "تي"
+  						  		    		header: 'Test',
+  										      title: 'Click Me',
+  									    	  description: 'Click Me',
+  								    		  id: 'te'
   						  		    	}
   						  				]
   						  			}
@@ -63,81 +63,81 @@
   						  	})
   							},
                               {
-                                  الاسم: 'الرد السريع'،
-                                  ButtonParamsJson: JSON.stringify({
-                                      عرض_نص: 'رد_سريع'،
-                                      المعرف: "رسالة".
+                                  name: 'quick_reply',
+                                  buttonParamsJson: JSON.stringify({
+                                      display_text: 'quick_reply',
+                                      id: `message`
                                   })
                               },
                               {
-                                  الاسم: "cta_url"،
-                                  ButtonParamsJson: JSON.stringify({
-                                      عرض النص: 'url'،
-                                      عنوان URL: 'https://www.google.com'،
-                                      التاجر_url: ''
+                                  name: 'cta_url',
+                                  buttonParamsJson: JSON.stringify({
+                                      display_text: 'url',
+                                      url: 'https://www.google.com',
+                                      merchant_url: ''
                                   })
                               },
                               {
-                                  الاسم: "cta_call"،
-                                  ButtonParamsJson: JSON.stringify({
-                                      display_text: 'اتصال',
-                                      معرف: 'الرسالة'
+                                  name: 'cta_call',
+                                  buttonParamsJson: JSON.stringify({
+                                      display_text: 'call',
+                                      id: 'message'
                                   })
                               },
                               {
-                                  الاسم: 'cta_copy'،
-                                  ButtonParamsJson: JSON.stringify({
-                                      Display_text: "نسخ"،
-                                      المعرف: "123456789"،
-                                      copy_code: 'رسالة'
+                                  name: 'cta_copy',
+                                  buttonParamsJson: JSON.stringify({
+                                      display_text: 'copy',
+                                      id: '123456789',
+                                      copy_code: 'message'
                                   })
                               },
                               {
-                                  الاسم: 'cta_reminder'،
-                                  ButtonParamsJson: JSON.stringify({
-                                      عرض النص: 'cta_reminder'،
-                                      معرف: 'الرسالة'
+                                  name: 'cta_reminder',
+                                  buttonParamsJson: JSON.stringify({
+                                      display_text: 'cta_reminder',
+                                      id: 'message'
                                   })
                               },
                               {
-                                  الاسم: "cta_cancel_reminder"،
-                                  ButtonParamsJson: JSON.stringify({
-                                      Display_text: 'cta_cancel_reminder'،
-                                      معرف: 'الرسالة'
+                                  name: 'cta_cancel_reminder',
+                                  buttonParamsJson: JSON.stringify({
+                                      display_text: 'cta_cancel_reminder',
+                                      id: 'message'
                                   })
                               },
                               {
-                                  الاسم: "address_message"،
-                                  ButtonParamsJson: JSON.stringify({
-                                      عرض النص: 'عنوان الرسالة'،
-                                      معرف: 'الرسالة'
+                                  name: 'address_message',
+                                  buttonParamsJson: JSON.stringify({
+                                      display_text: 'address_message',
+                                      id: 'message'
                                   })
                               },
                               {
-                                  الاسم: 'send_location'،
-                                  ButtonParamsJson: JSON.stringify({
+                                  name: 'send_location',
+                                  buttonParamsJson: JSON.stringify({
                                   })
                               }
   			  		],
-                رسالة بارامس جيسون: ''
+                messageParamsJson: ''
             }
         };        
 
-        دع الرسالة = generateWAMessageFromContent(m.chat، {
-            عرض مرة واحدة: {
-                رسالة: {
-                    رسالة تفاعلية,
+        let msg = generateWAMessageFromContent(m.chat, {
+            viewOnceMessage: {
+                message: {
+                    interactiveMessage,
                 },
             },
-        }, { userJid: conn.user.jid، مقتبس: m })
-        msg.message.viewOnceMessage.message.interactiveMessage.contextInfo = { MentionId: [mentionId] };
-        conn.relayMessage(m.chat، msg.message، { معرف الرسالة: msg.key.id });
+        }, { userJid: conn.user.jid, quoted: m })
+        msg.message.viewOnceMessage.message.interactiveMessage.contextInfo = { mentionedJid: [mentionId] };
+        conn.relayMessage(m.chat, msg.message, { messageId: msg.key.id });
 
-    } آخر {
+    } else {
         conn.sendFile(m.chat, 'JoAnimi•Error.jpg', m);      
     }    
 };
-Handler.help = ['imgboton'];
-Handler.tags = ['للاختبار'];
-Handler.command = /^(imgboton)$/i;
-معالج التصدير الافتراضي؛
+handler.help = ['imgboton'];
+handler.tags = ['For Test'];
+handler.command = /^(imgboton)$/i;
+export default handler;
