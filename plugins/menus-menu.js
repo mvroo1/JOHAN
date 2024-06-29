@@ -6,10 +6,6 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
             header: {
               title: '*┃━━━━━⬣𝙼𝚅𝚁𝙾-𝙱𝙾𝚃⬣━━━━━┃*
             },
-              const taguser = '@' +  m.sender.split('@s.whatsapp.net')[0];
-let str = ` 
-*مارو بوتتتتتتتتتت*
-‬`.trim();
             body: {
               text: '*▢اسم البوت : بوت مارو*'
             },
