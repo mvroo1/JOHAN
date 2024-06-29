@@ -5,6 +5,10 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
           interactiveMessage: {
             header: {
               title: '*┃━━━━━⬣𝙼𝚅𝚁𝙾-𝙱𝙾𝚃⬣━━━━━┃*'
+                const taguser = '@' +  m.sender.split('@s.whatsapp.net')[0];
+let str = ` 
+*ماروبوت*
+‬`.trim();
             },
             body: {
               text: '*▢اسم البوت : بوت مارو*'
