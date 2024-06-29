@@ -1,90 +1,90 @@
-// @type {استيراد('@whiskeysockets/baileys')}
+// @type {import('@whiskeysockets/baileys')}
 
-ثابت { بروتوكول، توليد WAMessage، هل JidsSameUser، فك تشفير التصويت، } = (انتظر الاستيراد ('@whiskeysockets/baileys')). default؛
-تصدير دالة غير متزامنة all(m, chatUpdate) {
-إذا (m.isBaileys) {
-يعود
+const { proto, generateWAMessage, areJidsSameUser, decryptPollVote, } = (await import('@whiskeysockets/baileys')).default;
+export async function all(m, chatUpdate) {
+if (m.isBaileys) {
+return
 }
-إذا لم تكن (m.message) {
-يعود
+if (!m.message) {
+return
 }
-إذا (!(m.message.buttonsResponseMessage || m.message.templateButtonReplyMessage || m.message.listResponseMessage || m.message.interactiveResponseMessage)) {
-يعود
+if (!(m.message.buttonsResponseMessage || m.message.templateButtonReplyMessage || m.message.listResponseMessage || m.message.interactiveResponseMessage)) {
+return
 }
-دعني أعرف
-إذا (m.message.buttonsResponseMessage) {
-المعرف = m.message.buttonsResponseMessage.selectedButtonId
-} وإلا إذا (m.message.templateButtonReplyMessage) {
-المعرف = m.message.templateButtonReplyMessage.selectedId
-} وإلا إذا (m.message.listResponseMessage) {
-المعرف = m.message.listResponseMessage.singleSelectReply?.selectedRowId؛
-} وإلا إذا (m.message.interactiveResponseMessage) {
-المعرف = JSON.parse(m.message.interactiveResponseMessage.nativeFlowResponseMessage.paramsJson).id
+let id
+if (m.message.buttonsResponseMessage) {
+id = m.message.buttonsResponseMessage.selectedButtonId
+} else if (m.message.templateButtonReplyMessage) {
+id = m.message.templateButtonReplyMessage.selectedId
+} else if (m.message.listResponseMessage) {
+id = m.message.listResponseMessage.singleSelectReply?.selectedRowId;
+} else if (m.message.interactiveResponseMessage) {
+id = JSON.parse(m.message.interactiveResponseMessage.nativeFlowResponseMessage.paramsJson).id
 }
-ثابت النص = m.message.buttonsResponseMessage?.selectedDisplayText || m.message.templateButtonReplyMessage?.selectedDisplayText || m.message.listResponseMessage?.title
-دع isIdMessage = خطأ
-دع usePrefix
-لـ (اسم ثابت في global.plugins) {
-البرنامج المساعد const = global.plugins[name]
-إذا لم يكن هناك ملحق
-يكمل
+const text = m.message.buttonsResponseMessage?.selectedDisplayText || m.message.templateButtonReplyMessage?.selectedDisplayText || m.message.listResponseMessage?.title
+let isIdMessage = false
+let usedPrefix
+for (const name in global.plugins) {
+const plugin = global.plugins[name]
+if (!plugin) {
+continue
 }
-إذا (البرنامج المساعد. معطل) {
-يكمل
+if (plugin.disabled) {
+continue
 }
-إذا لم يتم اختيار ['تقييد']) {
-إذا (plugin.tags && plugin.tags.includes('admin')) {
-يكمل
+if (!opts['restrict']) {
+if (plugin.tags && plugin.tags.includes('admin')) {
+continue
 }}
-إذا (نوع البرنامج المساعد!== 'وظيفة') {
-يكمل
+if (typeof plugin !== 'function') {
+continue
 }
-إذا لم يكن الأمر plugin.command
-يكمل
+if (!plugin.command) {
+continue
 }
 const str2Regex = (str) => str.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
-const _prefix = plugin.customPrefix؟ plugin.customPrefix : هذه البادئة؟ this.prefix : global.prefix
-const match = (_prefix مثيل RegExp ? [[_prefix.exec(id), _prefix]] : Array.isArray(_prefix) ? _prefix.map((p) => {
-const re = p مثيل RegExp؟ ع : جديد RegExp(str2Regex(p));
-إرجاع [re.exec(id)، إعادة]
-}):
-typeof _prefix === 'سلسلة'؟
-[[new RegExp(str2Regex(_prefix)).exec(id)، جديد RegExp(str2Regex(_prefix))]] :
-[[[]، RegExp الجديد]]
-).العثور على((ع) => ص[1])
-إذا ((usedPrefix = (match[0] || '')[0])) {
-ثابت noPrefix = id.replace(usedPrefix، '')
-دع [الأمر] = noPrefix.trim().split` `.filter((v) => v)
-الأمر = (الأمر || '').toLowerCase()
-const isId = plugin.command مثيل RegExp؟
-plugin.command.test(الأمر) :
-Array.isArray(plugin.command) ؟
-plugin.command.some((cmd) => cmd instanceof RegExp؟
-cmd.test(الأمر) :
-كمد === الأمر،
+const _prefix = plugin.customPrefix ? plugin.customPrefix : this.prefix ? this.prefix : global.prefix
+const match = (_prefix instanceof RegExp ? [[_prefix.exec(id), _prefix]] : Array.isArray(_prefix) ? _prefix.map((p) => {
+const re = p instanceof RegExp ? p : new RegExp(str2Regex(p));
+return [re.exec(id), re]
+}) :
+typeof _prefix === 'string' ?
+[[new RegExp(str2Regex(_prefix)).exec(id), new RegExp(str2Regex(_prefix))]] :
+[[[], new RegExp]]
+).find((p) => p[1])
+if ((usedPrefix = (match[0] || '')[0])) {
+const noPrefix = id.replace(usedPrefix, '')
+let [command] = noPrefix.trim().split` `.filter((v) => v)
+command = (command || '').toLowerCase()
+const isId = plugin.command instanceof RegExp ?
+plugin.command.test(command) :
+Array.isArray(plugin.command) ?
+plugin.command.some((cmd) => cmd instanceof RegExp ?
+cmd.test(command) :
+cmd === command,
 ) :
-نوع plugin.command === 'string' ؟
-plugin.command === الأمر:
-خطأ شنيع
-إذا لم يكن (المعرف) {
-يكمل
+typeof plugin.command === 'string' ?
+plugin.command === command :
+false
+if (!isId) {
+continue
 }
-isIdMessage = صحيح
+isIdMessage = true
 }}
-const messages = await generateWAMessage(m.chat, {text: isIdMessage ? id: text, mentions: m.mentionedJid}, {
-معرف المستخدم: this.user.id،
-مقتبس: m.quoted && m.quoted.fakeObj،
+const messages = await generateWAMessage(m.chat, {text: isIdMessage ? id : text, mentions: m.mentionedJid}, {
+userJid: this.user.id,
+quoted: m.quoted && m.quoted.fakeObj,
 })
-الرسائل.المفتاح.مني = areJidsSameUser(m.sender، this.user.id)
+messages.key.fromMe = areJidsSameUser(m.sender, this.user.id)
 messages.key.id = m.key.id
 messages.pushName = m.name
-إذا (m.isGroup) {
-الرسائل.المفتاح.المشارك = الرسائل.المشارك = المرسل
+if (m.isGroup) {
+messages.key.participant = messages.participant = m.sender
 }
-رسالة ثابتة = {
-...تحديث الدردشة،
-الرسائل: [proto.WebMessageInfo.fromObject(messages)].map((v) => (v.conn = this, v))،
-النوع: "إلحاق"،
+const msg = {
+...chatUpdate,
+messages: [proto.WebMessageInfo.fromObject(messages)].map((v) => (v.conn = this, v)),
+type: 'append',
 }
-هذا.ev.emit('messages.upsert', msg)
+this.ev.emit('messages.upsert', msg)
 }
