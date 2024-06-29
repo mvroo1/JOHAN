@@ -1,12 +1,8 @@
-let handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, isPrems}) => {
-    let d = new Date(new Date + 3600000)
-    let locale = 'ar'
-    let week = d.toLocaleDateString(locale, { weekday: 'long' })
-    let date = d.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })
-    let _uptime = process.uptime() * 1000
-    let uptime = clockString(_uptime)
+let week = d.toLocaleDateString(locale, { weekday: 'long' })
+let date = d.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })
+let _uptime = process.uptime() * 1000
+let uptime = clockString(_uptime)
 let videoUrl = 'https://telegra.ph/file/73ef7488ba7f7f3e613ee.mp4';
-let username = conn.getName(who)
 let handler = async (m, { conn, args, usedPrefix, command }) => {   
     conn.relayMessage(m.chat, {
       viewOnceMessage: {
