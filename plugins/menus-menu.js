@@ -1,5 +1,3 @@
-let handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, isPrems}) => {
-    let d = new Date(new Date + 3600000)
 let week = d.toLocaleDateString(locale, { weekday: 'long' })
 let date = d.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })
 let videoUrl = 'https://telegra.ph/file/73ef7488ba7f7f3e613ee.mp4';
