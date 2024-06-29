@@ -7,7 +7,10 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
               title: '*♯𝙼𝚅𝚁𝙾𝙱𝙾𝚃 🧛🏻‍♂️📌*'
             },
             body: {
-              text: 'نورت قسم الاوامر بلازرار🕊💜'
+              text: '*┃━━━━━⬣𝙼𝚅𝚁𝙾-𝙱𝙾𝚃⬣━━━━━┃*',
+                  '*▢اهلا بيك في اوامر بوت مارو🧛🏻‍♂️*',
+                 '*▢اسم البوت : بـوت مـارو*',
+                  '*▢موقع التنصيب : heroku*',
             },
             nativeFlowMessage: {
               buttons: [
